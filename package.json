@@ -1,5 +1,8 @@
 {
   "name": "portfolio",
+  "sideEffects": [
+    "*.css"
+  ],
   "version": "0.1.0",
   "description": "Programmer's portfolio",
   "main": "src/index.js",
@@ -15,15 +18,23 @@
   "author": "Amilosz",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@types/source-map": "^0.5.2",
     "markdown-element": "^2.0.2"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "typescript": "^3.6.3",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
   }

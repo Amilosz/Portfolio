@@ -1,23 +1,16 @@
 import { getAboutMe } from '../github/service';
+import {markdownRenderer, renderer} from '../common/decorator';
 
-// eslint-disable-next-line no-undef,import/prefer-default-export
+@renderer()
+@markdownRenderer
 export class AboutMe extends HTMLElement {
   constructor() {
-    super();
-    this.shadow = this.attachShadow({ mode: 'open' });
-    this.render();
+      super();
+      this.init();
   }
-
 
   async render() {
-    this.clean();
-    // eslint-disable-next-line no-undef
-    const md = document.createElement('mark-down');
-    md.textContent = (await getAboutMe());
-    this.shadow.appendChild(md);
-  }
-
-  clean() {
-    this.shadow.childNodes.forEach((child) => child.remove());
+    const about = (await getAboutMe());
+    this.shadowRoot.innerHTML = this.renderMarkdown(about);
   }
 }

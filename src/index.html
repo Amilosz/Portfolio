@@ -16,7 +16,7 @@
             border-radius: 50%;
             height: 150px;
             width: 150px;
-            border: 12px solid #fff;
+            border: 6px solid #fff;
         }
         section:last-of-type ul{
             list-style-type: none;
@@ -28,6 +28,11 @@
         section:last-of-type ul li {
             display: inline-block;
             cursor: pointer;
+            transition: border-bottom 150ms ease-in;
+        }
+        section:last-of-type ul li:hover {
+            border-bottom: 3px solid darkred;
+            margin-bottom: -3px;
         }
 
     </style>
@@ -41,13 +46,29 @@
 <section>
     <ul>
         <li onclick="controls.startGame()">🎮</li>
-        <li>📝</li>
+        <li><a href="blog/index.html" style="text-decoration: none"> 📝</a></li>
         <li onclick="controls.startJoke()">😂</li>
     </ul>
 </section>
+<asaid>
+    <gh-repos></gh-repos>
+    <template id="gh-logo">
+        <style>
+            .svg-inline--fa{
+                display: inline-block;
+                font-size: inherit;
+                height: 1em;
+                overflow: visible;
+                vertical-align: -.125em;
+            }
+            .svg-inline--fa.fa-w-16{
+                width: 1em;
+            }
+        </style>
+        My <i class="fab fa-github"></i> github repositories
+    </template>
+</asaid>
 
-<blog-post post-name="0"></blog-post>
-<blog-post post-name="1"></blog-post>
 
 </body>
 </html>

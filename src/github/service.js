@@ -2,18 +2,24 @@ import { GitHubRepo } from './model';
 
 const REPOS_URL = 'https://api.github.com/users/Amilosz/repos';
 const RAW_URL = 'https://raw.githubusercontent.com/Amilosz/Amilosz.github.io/master/blog/en/';
-const POSTS_URL = 'posts/';
+const POSTS_SUB_URL = 'posts/';
+const FILES_URL = 'https://api.github.com/repos/Amilosz/Amilosz.github.io/contents/blog/en/posts/';
 const ABOUT_ME = 'about-me.md';
-const FORBIDDEN_REPOS = ['Portfolio'];
+const FORBIDDEN_REPOS = [''];
+const POST_NAME = /(\d+)\.md/;
 
 const convert = ({
   name,
   stargazers_count: stars,
-  license
+  license,
+  html_url: url,
+  language
 }) => new GitHubRepo({
   name,
   stars,
-  license: license ? license.spdx_id : ''
+  license: license ? license.spdx_id : '',
+  url,
+  language
 });
 
 export default async function getRepo() {
@@ -45,8 +51,24 @@ async function getRaWFileContent(pathToFile) {
   }
 }
 export async function getBlogPost(name = '0.md') {
-  return getRaWFileContent(`${POSTS_URL}${name}`);
+  return getRaWFileContent(`${RAW_URL}${POSTS_SUB_URL}${name}`);
 }
 export async function getAboutMe() {
-  return getRaWFileContent('about-me.md');
+  return getRaWFileContent(`${ABOUT_ME}`);
+}
+
+export async function getBlogPostNames() {
+  try {
+    // eslint-disable-next-line no-undef
+    const response = await fetch(FILES_URL);
+    if (response.ok) {
+      return (await response.json())
+        .filter((file) => POST_NAME.test(file.name))
+        .map(({ name }) => name.split('.')[0]);
+    }
+    throw Error("response not 200'");
+  } catch (err) {
+    console.warn(err);
+    return [];
+  }
 }
