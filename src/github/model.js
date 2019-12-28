@@ -10,7 +10,7 @@ export class GitHubRepo {
 
 
   get starsInfo() {
-    return this.stars > 0 ? `(${this.stars}⭐) ` : '';
+    return this.stars > 0 ? `(${this.stars})⭐ ` : '';
   }
 
   toString() {
